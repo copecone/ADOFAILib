@@ -25,7 +25,7 @@ for action in adofaiLevel.data["actions"]:
         else:
             trackAppearAnim[action["floor"]] = trackAppearAnim[0]
 
-tileInit = 120
+tileInit = 240
 tileAppearAnimation = trackAppearAnim[0]
 tileDisappearAnimation = 0
 for i in range(adofaiLevel.length):
@@ -35,7 +35,7 @@ for i in range(adofaiLevel.length):
     
     adofaiLevel.moveTrack(i + 1, range = -1, duration = 4 * adofaiLevel[i + 1]["bpmScale"], ease = Easing("InQuart"), opacity = 0, rotation = -20, position = [getrand() * 1.5, -3], scale = [80, 80], angleOffset = 180 * tileDisappearAnimation * adofaiLevel[i + 1]["bpmScale"])
 
-    adofaiLevel.moveTrack(i + 1, range = 0, duration = 0, ease = Easing("Linear"), opacity = 0, rotation = 15, position = [0.2, 0.6], angleOffset = -180 * tileInit)
+    adofaiLevel.moveTrack(i + 1, range = 0, duration = 0, ease = Easing("Linear"), opacity = 0, rotation = 15, position = [0.2, 0.6], angleOffset = -180 * tileInit * adofaiLevel[i + 1]["bpmScale"])
     adofaiLevel.moveTrack(i + 1, range = 0, duration = 4 * adofaiLevel[i + 1]["bpmScale"], ease = Easing("OutQuart"), opacity = 100, rotation = 0, position = [0, 0], angleOffset = -180 * tileAppearAnimation * adofaiLevel[i + 1]["bpmScale"])
 
 adofaiParser.save(adofaiLevel, "test2.adofai")
