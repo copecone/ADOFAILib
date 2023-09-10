@@ -16,7 +16,7 @@ class ADOFAIParser:
         if self.content[0] == u'\ufeff':
             self.content = self.content[1:]
 
-        self.content = self.content.replace(", },\n", "},\n")
+        self.content = self.content.replace(", },\n", "},\n").replace(", }\n\t],", "}\n\t],")
         self.parsed = json.loads(self.content)
 
     def getLevel(self):
@@ -43,7 +43,7 @@ class ADOFAIParser:
 		    "trackColorType": "Single", "beatsAhead": 3, "trackDisappearAnimation": "None", "beatsBehind": 4, "trackAnimation": "None", "trackColorAnimDuration": 2, "trackColorPulse": "None", "trackPulseLength": 10, # Track Animation Settings
 		    "backgroundColor": "000000", "showDefaultBGIfNoImage": "Enabled", "bgImage": "", "bgImageColor": "ffffff", # Background Settings
             "parallax": [100, 100], "bgDisplayMode": "FitToScreen", "lockRot": "Disabled", "loopBG": "Disabled", "unscaledSize": 100, # Background Extra Settings
-		    "relativeTo": "Player", "position": [0, 0], "rotation": 0, "zoom": 100, "pulseOnFloor": "Enabled", "startCamLowVFX": "Disabled",
+		    "relativeTo": "Player", "position": [0, 0], "rotation": 0, "zoom": 100, "pulseOnFloor": "Enabled", 
 		    "bgVideo": "", "loopVideo": "Disabled", "vidOffset": 0, # Video Background Settings
 		    "floorIconOutlines": "Disabled", "stickToFloors": "Enabled", # Floor Settings
 		    "planetEase": "Linear", "planetEaseParts": 1, "planetEasePartBehavior": "Mirror", # Planet Settings
@@ -73,7 +73,7 @@ class ADOFAIParser:
         else:
             self.file = open(path, "w", encoding="utf-8")
 
-        self.file.write(json.dumps(self.getDefaultWith(level.data), sort_keys = True, indent = 4))
+        self.file.write(json.dumps(self.getDefaultWith(level.data), sort_keys = True))
         self.file.close()
 
     def reload(self):

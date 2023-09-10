@@ -3,3 +3,4 @@ class Easing:
         self.type = type
 
 Easing.Linear = Easing("Linear")
+Easing.OutCubic = Easing("OutCubic")

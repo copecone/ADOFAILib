@@ -1,6 +1,8 @@
 import json
 from adofailib.vfx import *
 from adofailib.vfx.easing import Easing
+from adofailib.vfx.decoration import ADOFAIDecoration
+from adofailib.vfx.color import Color
 
 class ADOFAILevel:
     chartActions = [
@@ -65,6 +67,8 @@ class ADOFAILevel:
         
         for deco in self._deco:
             self.data["decorations"].append(deco.convert())
+            for event in deco.events:
+                self.data["actions"].append(event)
 
     def addDecoration(self, decoration: decoration.ADOFAIDecoration):
         self._deco.append(decoration)
@@ -89,6 +93,15 @@ class ADOFAILevel:
         if rotation != None: result["rotationOffset"] = rotation
 
         self.data["actions"].append(result)
+
+    def moveDecoration(
+        self, tile: int = 0, duration: float = 0, angleOffset: float = 0, # Timings Options
+        file: str = None, position: tuple[float] = (None, None), rotation: float = None, scale: tuple[float] = (None, None), opacity: float = None, color: Color = None, # Moving Options
+        ease: Easing = Easing.Linear, tag: list[str] = [], eventTag: list[str] = [], # Extra Options
+    ):
+        decoMove = ADOFAIDecoration.global_move(tile, duration, angleOffset, file, position, rotation, scale, opacity, color, ease, tag, eventTag)
+        self.data["actions"].append(decoMove)
+        return decoMove
 
     def setBPMScalePoint(self, bpm):
         self.defaultBPMForScale = bpm

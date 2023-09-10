@@ -57,10 +57,7 @@ class ADOFAIDecoration:
         file: str = None, position: tuple[float] = (None, None), rotation: float = None, scale: tuple[float] = (None, None), opacity: float = None, color: Color = None, # Moving Options
         ease: Easing = Easing.Linear, tag: list[str] = [], eventTag: list[str] = [], # Extra Options
     ):
-        result = {}
-        result["floor"] = tile
-        result["duration"] = duration
-        result["angleOffset"] = angleOffset
+        result = {"eventType": "MoveDecorations", "floor": tile, "duration": duration, "angleOffset": angleOffset}
         if file != None: result["decorationImage"] = file
         if position != (None, None): result["positionOffset"] = list(position)
         if rotation != None: result["rotationOffset"] = rotation
